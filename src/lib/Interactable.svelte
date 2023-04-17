@@ -1,5 +1,6 @@
 <script lang="ts">
     import {currentGameData} from "../stores";
+    import {setContext} from "svelte";
 
     export let objectData: EscapeObject;
     export let name: string;
@@ -25,6 +26,14 @@
             objectData.visible = false;
         }
     }
+
+    setContext("setExtraText", (text: string) => {
+        extraText = text;
+    });
+
+    setContext("setAllowHover", (allow: boolean) => {
+        allowHover = allow;
+    });
 </script>
 
 <div on:mousemove={(e) => handleMouseMove(e)} on:mouseleave={() => isHovering = false}

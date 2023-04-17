@@ -1,4 +1,6 @@
 <script lang="ts">
+    import {getContext} from "svelte";
+
     export let title: string;
     export let isOverlayVisible: boolean = false;
 
@@ -9,6 +11,12 @@
             }
         }
     }
+
+    function toggleHover(showHover: boolean) {
+        getContext("setAllowHover")(showHover);
+    }
+
+    $: toggleHover(!isOverlayVisible);
 </script>
 
 <div id="object-overlay" class:isOverlayVisible on:click={(e) => closeOverlay(e)}>

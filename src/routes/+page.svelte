@@ -83,9 +83,9 @@
     <aside id="inventory">
         <h2>Inventory</h2>
         <div>
-            {#each $currentGameData.inventory ?? [] as obj, i (i)}
+            {#each $currentGameData.inventory as obj, i (i)}
                 <div class="slot">
-                    <Interactable name={obj.name} posX={-1} posY={-1}>
+                    <Interactable posX={-1} posY={-1} objectData={obj}>
                         <EscapeObject objectData={obj}/>
                     </Interactable>
                 </div>

@@ -2,6 +2,7 @@
     import Interactable from "$lib/Interactable.svelte";
     import Cabinet from "$lib/objects/Cabinet.svelte";
     import CodeDevice from "../objects/CodeDevice.svelte";
+    import WallOutlet from "../objects/WallOutlet.svelte";
 
     let cabinetData: EscapeCabinet = {
         name: "Cabinet",
@@ -50,6 +51,15 @@
         hasConnection: false,
         visible: true,
     };
+
+    let wallOutletData: EscapeWallOutlet = {
+        name: "Wall Outlet 1",
+        img: "/objects/wall_outlet.png",
+        type: "WallOutlet",
+        isActive: true,
+        potentialDevices: [codeDeviceData],
+        visible: true,
+    };
 </script>
 
 <main>
@@ -77,12 +87,18 @@
         </Interactable>
     {/if}
 
-    <Interactable posX="200" posY="200" name="Cabinet">
+    <Interactable posX="200" posY="200" objectData={cabinetData}>
         <Cabinet bind:objectData={cabinetData}/>
     </Interactable>
 
-    <Interactable posX="300" posY="200" name="Code device">
-        <CodeDevice bind:objectData={codeDeviceData}/>
+    {#key wallOutletData}
+        <Interactable posX="300" posY="200" objectData={codeDeviceData}>
+            <CodeDevice bind:objectData={codeDeviceData}/>
+        </Interactable>
+    {/key}
+
+    <Interactable posX="400" posY="200" objectData={wallOutletData}>
+        <WallOutlet bind:objectData={wallOutletData}/>
     </Interactable>
 </main>
 

@@ -41,6 +41,6 @@ interface EscapeDoor extends EscapeObject {
 }
 
 interface EscapeWallOutlet extends EscapeObject {
-    connectedDeviceName: string;
+    potentialDevices: EscapeNetworkDevice[];
     isActive: boolean;
 }

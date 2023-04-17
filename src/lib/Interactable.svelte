@@ -2,8 +2,7 @@
     import {currentGameData} from "../stores";
     import {setContext} from "svelte";
 
-    export let objectData: EscapeObject | null = null
-    export let name: string;
+    export let objectData: EscapeObject;
     export let posX: number = -1;
     export let posY: number = -1;
     export let isCollectable: boolean = false;
@@ -42,7 +41,7 @@
     <slot/>
     <span id="hoverTitle" style="--hoverX: {hoverX}px; --hoverY: {hoverY}px"
           class:isHovering={isHovering && allowHover}>
-        {objectData?.name ?? name}
+        {objectData?.name}
 
         {#if isCollectable}
             <br/><b>Left-click</b> to put item into inventory!<br/>

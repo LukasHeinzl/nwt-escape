@@ -1,6 +1,7 @@
 <script lang="ts">
     import Interactable from "$lib/Interactable.svelte";
     import Cabinet from "$lib/objects/Cabinet.svelte";
+    import CodeDevice from "../objects/CodeDevice.svelte";
 
     let cabinetData: EscapeCabinet = {
         name: "Cabinet",
@@ -38,6 +39,17 @@
         type: "CrimpingTool",
         visible: true,
     };
+
+    let codeDeviceData: EscapeCodeDevice = {
+        name: "Code Device",
+        img: "/objects/code_device.png",
+        type: "CodeDevice",
+        code: "1234",
+        isActive: true,
+        needsConnection: true,
+        hasConnection: false,
+        visible: true,
+    };
 </script>
 
 <main>
@@ -67,6 +79,10 @@
 
     <Interactable posX="200" posY="200" name="Cabinet">
         <Cabinet bind:objectData={cabinetData}/>
+    </Interactable>
+
+    <Interactable posX="300" posY="200" name="Code device">
+        <CodeDevice bind:objectData={codeDeviceData}/>
     </Interactable>
 </main>
 

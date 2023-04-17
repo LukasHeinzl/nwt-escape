@@ -24,7 +24,12 @@ interface EscapeCabinet extends EscapeObject {
     unlocked: boolean;
 }
 
-interface EscapeCodeDevice extends EscapeObject {
+interface EscapeNetworkDevice extends EscapeObject {
+    needsConnection: boolean;
+    hasConnection: boolean;
+}
+
+interface EscapeCodeDevice extends EscapeNetworkDevice {
     code: string;
     isActive: boolean;
 }

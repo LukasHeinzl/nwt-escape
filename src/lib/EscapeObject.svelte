@@ -1,10 +1,12 @@
 <script lang="ts">
     import Cabinet from "./objects/Cabinet.svelte";
+    import CrimpingTool from "./objects/CrimpingTool.svelte";
 
     export let objectData: EscapeObject;
 
     const objectComponents = {
         Cabinet,
+        CrimpingTool,
         /*CodeDevice,
         CrimpingTool,
         Door,

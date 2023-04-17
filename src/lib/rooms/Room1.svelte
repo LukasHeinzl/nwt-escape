@@ -31,6 +31,13 @@
         type: "CablePlug",
         visible: true,
     };
+
+    let crimpingToolData: EscapeObject = {
+        name: "Crimping Tool",
+        img: "/objects/crimping_tool.png",
+        type: "CrimpingTool",
+        visible: true,
+    };
 </script>
 
 <main>
@@ -49,6 +56,12 @@
     {#if cablePlug2Data.visible}
         <Interactable posX="300" posY="400" bind:objectData={cablePlug2Data} isCollectable>
             <img src={cablePlug2Data.img} alt={cablePlug2Data.name}/>
+        </Interactable>
+    {/if}
+
+    {#if crimpingToolData.visible}
+        <Interactable posX="400" posY="400" bind:objectData={crimpingToolData} isCollectable>
+            <img src={crimpingToolData.img} alt={crimpingToolData.name}/>
         </Interactable>
     {/if}
 

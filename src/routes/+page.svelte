@@ -17,6 +17,7 @@
 
     async function startGame(retry: boolean = false) {
         if (retry) {
+            $currentRoom = 0;
             $currentGameData = JSON.parse(JSON.stringify(initialGameData));
         }
 
@@ -93,7 +94,7 @@
     </aside>
 
     <section id="currentRoom" style="--bg: url({$currentGameData.rooms[$currentRoom]?.background ?? ''})">
-
+        <svelte:component this={$currentGameData.rooms[$currentRoom]?.component ?? null}/>
     </section>
 </main>
 

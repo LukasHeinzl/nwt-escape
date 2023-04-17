@@ -3,8 +3,6 @@
 
     export let objectData: EscapeCodeDevice;
     let isOverlayVisible: boolean = false;
-
-    $: console.log(objectData);
 </script>
 
 <ObjectOverlay title={objectData.name} bind:isOverlayVisible>

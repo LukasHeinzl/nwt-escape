@@ -16,8 +16,6 @@ interface EscapeObject {
     img: string;
     type: string;
     visible?: boolean;
-    posX?: number;
-    posY?: number;
 }
 
 interface EscapeCabinet extends EscapeObject {

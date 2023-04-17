@@ -1,9 +1,11 @@
 <script lang="ts">
+    import Cabinet from "./objects/Cabinet.svelte";
+
     export let objectData: EscapeObject;
 
     const objectComponents = {
-        /*Cabinet,
-        CodeDevice,
+        Cabinet,
+        /*CodeDevice,
         CrimpingTool,
         Door,
         WallOutlet*/

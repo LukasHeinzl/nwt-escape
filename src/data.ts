@@ -42,5 +42,14 @@ interface EscapeDoor extends EscapeObject {
 
 interface EscapeWallOutlet extends EscapeObject {
     potentialDevices: EscapeNetworkDevice[];
+    connectedDeviceIdx: number;
     isActive: boolean;
+}
+
+interface EscapePlacementAnchor extends EscapeObject {
+    potentialDevices: EscapeObject[];
+}
+
+interface EscapeAccessPoint extends EscapeNetworkDevice {
+    connectedDevices: EscapeNetworkDevice[];
 }

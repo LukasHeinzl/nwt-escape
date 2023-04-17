@@ -3,15 +3,9 @@
     import Cabinet from "$lib/objects/Cabinet.svelte";
     import CodeDevice from "../objects/CodeDevice.svelte";
     import WallOutlet from "../objects/WallOutlet.svelte";
-
-    let cabinetData: EscapeCabinet = {
-        name: "Cabinet",
-        img: "/objects/cabinet.png",
-        type: "Cabinet",
-        contents: [],
-        pin: "1234",
-        unlocked: false,
-    };
+    import AccessPoint from "../objects/AccessPoint.svelte";
+    import PlacementAnchor from "../objects/PlacementAnchor.svelte";
+    import {resyncRoom} from "../../stores";
 
     let rawEthernetCableData: EscapeObject = {
         name: "Raw Ethernet Cable",
@@ -52,13 +46,41 @@
         visible: true,
     };
 
+    let accessPointData: EscapeAccessPoint = {
+        name: "Access Point",
+        img: "/objects/access_point.png",
+        type: "AccessPoint",
+        connectedDevices: [],
+        needsConnection: true,
+        hasConnection: false,
+        visible: false,
+    };
+
+    let accessPointAnchorData: EscapePlacementAnchor = {
+        name: "Access Point Anchor",
+        img: "/objects/access_point_anchor.png",
+        type: "PlacementAnchor",
+        potentialDevices: [accessPointData],
+        visible: true,
+    };
+
     let wallOutletData: EscapeWallOutlet = {
         name: "Wall Outlet 1",
         img: "/objects/wall_outlet.png",
         type: "WallOutlet",
+        connectedDeviceIdx: -1,
         isActive: true,
-        potentialDevices: [codeDeviceData],
+        potentialDevices: [codeDeviceData, accessPointData],
         visible: true,
+    };
+
+    let cabinetData: EscapeCabinet = {
+        name: "Cabinet",
+        img: "/objects/cabinet.png",
+        type: "Cabinet",
+        contents: [accessPointData],
+        pin: "1234",
+        unlocked: false,
     };
 </script>
 
@@ -91,15 +113,31 @@
         <Cabinet bind:objectData={cabinetData}/>
     </Interactable>
 
-    {#key wallOutletData}
+    {#key $resyncRoom}
         <Interactable posX="300" posY="200" objectData={codeDeviceData}>
-            <CodeDevice bind:objectData={codeDeviceData}/>
+            <CodeDevice objectData={codeDeviceData}/>
         </Interactable>
     {/key}
 
-    <Interactable posX="400" posY="200" objectData={wallOutletData}>
-        <WallOutlet bind:objectData={wallOutletData}/>
-    </Interactable>
+    {#key $resyncRoom}
+        <Interactable posX="400" posY="200" objectData={wallOutletData}>
+            <WallOutlet bind:objectData={wallOutletData}/>
+        </Interactable>
+    {/key}
+
+    {#key $resyncRoom}
+        {#if accessPointData.visible}
+            <Interactable posX="200" posY="300" objectData={accessPointData}>
+                <AccessPoint bind:objectData={accessPointData}/>
+            </Interactable>
+        {/if}
+    {/key}
+
+    {#if accessPointAnchorData.visible}
+        <Interactable posX="200" posY="300" objectData={accessPointAnchorData}>
+            <PlacementAnchor bind:objectData={accessPointAnchorData}/>
+        </Interactable>
+    {/if}
 </main>
 
 <style>

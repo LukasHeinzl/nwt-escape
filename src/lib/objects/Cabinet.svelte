@@ -34,7 +34,7 @@
         <section>
             {#each objectData.contents as obj, i (i)}
                 <div class="inventorySlot" on:click={() => addToInventory(i)}>
-                    <Interactable name={obj.name} posX={-1} posY={-1}>
+                    <Interactable posX={-1} posY={-1} objectData={obj}>
                         <img src={obj.img} alt={obj.name}/>
                     </Interactable>
                 </div>

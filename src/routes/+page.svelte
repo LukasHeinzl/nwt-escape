@@ -18,11 +18,11 @@
     async function startGame(retry: boolean = false) {
         if (retry) {
             $currentRoom = 0;
-            $currentGameData = JSON.parse(JSON.stringify(initialGameData));
+            $currentGameData = Object.assign({}, initialGameData);
         }
 
-        resumeGame();
         $currentGameData.state = "playing";
+        resumeGame();
     }
 
     function handlePause(e: KeyboardEvent): void {
@@ -93,7 +93,7 @@
         </div>
     </aside>
 
-    <section id="currentRoom" style="--bg: url({$currentGameData.rooms[$currentRoom]?.background ?? ''})">
+    <section id="currentRoom">
         <svelte:component this={$currentGameData.rooms[$currentRoom]?.component ?? null}/>
     </section>
 </main>
@@ -198,8 +198,6 @@
     section#currentRoom {
         position: relative;
         grid-area: currentRoom;
-        background: var(--bg);
-        background-size: cover;
         padding: 1rem;
         width: 1000px;
         height: 600px;

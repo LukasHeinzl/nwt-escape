@@ -1,6 +1,4 @@
 <script lang="ts">
-
-
     export let objectData: EscapeObject;
 
     const objectComponents = {

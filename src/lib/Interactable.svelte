@@ -1,4 +1,7 @@
 <script lang="ts">
+    import {currentGameData} from "../stores";
+
+    export let objectData: EscapeObject;
     export let name: string;
     export let posX: number = -1;
     export let posY: number = -1;
@@ -8,22 +11,33 @@
     let hoverX: number = 0;
     let hoverY: number = 0;
     let position = posX === -1 && posY === -1 ? "initial" : "absolute";
+    let extraText: string = "";
+    let allowHover: boolean = true;
 
     function handleMouseMove(e: MouseEvent): void {
         hoverX = e.clientX + 10;
         hoverY = e.clientY + 10;
     }
+
+    function addToInventory(): void {
+        if (isCollectable) {
+            $currentGameData.inventory.push(objectData);
+            objectData.visible = false;
+        }
+    }
 </script>
 
 <div on:mousemove={(e) => handleMouseMove(e)} on:mouseleave={() => isHovering = false}
-     on:mouseenter={() => isHovering = true} class:isHovering
+     on:mouseenter={() => isHovering = true} on:click={() => addToInventory()} class:isHovering
      style="--posX: {posX}px; --posY: {posY}px; --pos: {position};">
     <slot/>
-    <span id="hoverTitle" style="--hoverX: {hoverX}px; --hoverY: {hoverY}px" class:isHovering>
+    <span id="hoverTitle" style="--hoverX: {hoverX}px; --hoverY: {hoverY}px"
+          class:isHovering={isHovering && allowHover}>
         {name}
 
         {#if isCollectable}
-            <br/><b>Left-click</b> to put item into inventory!
+            <br/><b>Left-click</b> to put item into inventory!<br/>
+            {extraText}
         {/if}
     </span>
 </div>

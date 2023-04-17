@@ -8,7 +8,6 @@ interface EscapeGame {
 
 interface EscapeRoom {
     name: string;
-    background: string;
     component: any;
 }
 

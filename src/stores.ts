@@ -8,14 +8,14 @@ export const initialGameData: EscapeGame = {
     timeLeft: 10,
     state: "waiting",
     rooms: [
-        {name: "Physical Layer", background: "/room1.png", component: Room1},
-        {name: "Data Link Layer", background: "/room2.png", component: Room2},
-        {name: "Network Layer", background: "/room3.png", component: Room3},
-        {name: "Application Layer", background: "/room4.png", component: Room4},
+        {name: "Physical Layer", component: Room1},
+        {name: "Data Link Layer", component: Room2},
+        {name: "Network Layer", component: Room3},
+        {name: "Application Layer", component: Room4},
     ],
     inventory: [],
     stats: new Map<string, any>(),
 }
 
-export const currentGameData = writable<EscapeGame>(JSON.parse(JSON.stringify(initialGameData)));
+export const currentGameData = writable<EscapeGame>(Object.assign({}, initialGameData));
 export const currentRoom = writable<number>(0);

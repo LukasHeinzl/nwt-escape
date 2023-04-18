@@ -30,7 +30,7 @@
 </script>
 
 <ObjectOverlay title={objectData.name} bind:isOverlayVisible>
-    {#if objectData.unlocked}
+    {#if objectData.unlocked || (objectData.needsConnection && objectData.hasConnection)}
         <section>
             {#each objectData.contents as obj, i (i)}
                 <div class="inventorySlot" on:click={() => addToInventory(i)}>
@@ -42,6 +42,8 @@
                 {objectData.name} is empty!
             {/each}
         </section>
+    {:else if objectData.needsConnection && !objectData.hasConnection}
+        A network connection is needed to open this container.
     {:else}
         <input type="text" placeholder="Enter pin" bind:value={enteredPin} on:change={() => checkPin()}/>
         <button on:click={() => checkPin()}>Check</button>

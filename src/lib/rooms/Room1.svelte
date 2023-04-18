@@ -95,6 +95,8 @@
         contents: [accessPointData],
         pin: "1234",
         unlocked: false,
+        needsConnection: false,
+        hasConnection: false,
     };
 </script>
 

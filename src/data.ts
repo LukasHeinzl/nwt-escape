@@ -18,15 +18,15 @@ interface EscapeObject {
     visible?: boolean;
 }
 
-interface EscapeCabinet extends EscapeObject {
-    pin: string;
-    contents: EscapeObject[];
-    unlocked: boolean;
-}
-
 interface EscapeNetworkDevice extends EscapeObject {
     needsConnection: boolean;
     hasConnection: boolean;
+}
+
+interface EscapeCabinet extends EscapeNetworkDevice {
+    pin: string;
+    contents: EscapeObject[];
+    unlocked: boolean;
 }
 
 interface EscapeCodeDevice extends EscapeNetworkDevice {

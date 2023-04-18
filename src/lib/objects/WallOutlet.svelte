@@ -2,13 +2,13 @@
     import ObjectOverlay from "../ObjectOverlay.svelte";
     import {currentGameData, resyncConnections} from "../../stores";
 
-    function handleConnection(idx: number): void {
+    function handleConnection(idx: number, isActive: boolean): void {
         if (idx !== -1) {
             objectData.connectedDeviceIdx = idx;
         }
 
         if (objectData.connectedDeviceIdx !== -1) {
-            objectData.potentialDevices[objectData.connectedDeviceIdx].hasConnection = idx !== -1;
+            objectData.potentialDevices[objectData.connectedDeviceIdx].hasConnection = idx !== -1 && isActive;
             $resyncConnections++;
         }
 
@@ -33,6 +33,7 @@
     let isOverlayVisible: boolean = false;
     let ethernetCablesInInventoryCount: number;
     $: ethernetCablesInInventoryCount = $currentGameData.inventory.filter((obj: EscapeObject) => obj.type === "EthernetCable").length;
+    $: handleConnection(objectData.connectedDeviceIdx, objectData.isActive);
 </script>
 
 <ObjectOverlay title={objectData.name} bind:isOverlayVisible>
@@ -41,13 +42,13 @@
         {#if objectData.connectedDeviceIdx !== -1}
             This wall outlet is currently connected to:
             <b>{objectData.potentialDevices[objectData.connectedDeviceIdx].name}</b>
-            <button on:click={() => handleConnection(-1)}>Remove connection</button>
+            <button on:click={() => handleConnection(-1, false)}>Remove connection</button>
         {:else}
             {#if ethernetCablesInInventoryCount === 0}
                 <span>You need at least one ethernet cable in your inventory to connect this outlet to a device.</span>
             {:else}
                 Connect this outlet to a device (consumes one ethernet cable from the inventory!):<br/>
-                <select on:change={(e) => handleConnection(e.target.value)}>
+                <select on:change={(e) => handleConnection(e.target.value, objectData.isActive)}>
                     <option value={-1}>Select...</option>
                     {#each objectData.potentialDevices as device, i (i)}
                         {#if device.needsConnection && !device.hasConnection && device.visible}

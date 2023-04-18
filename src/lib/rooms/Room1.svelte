@@ -1,11 +1,12 @@
 <script lang="ts">
-    import Interactable from "$lib/Interactable.svelte";
-    import Cabinet from "$lib/objects/Cabinet.svelte";
+    import Interactable from "../Interactable.svelte";
+    import Cabinet from "../objects/Cabinet.svelte";
     import CodeDevice from "../objects/CodeDevice.svelte";
     import WallOutlet from "../objects/WallOutlet.svelte";
     import AccessPoint from "../objects/AccessPoint.svelte";
     import PlacementAnchor from "../objects/PlacementAnchor.svelte";
-    import {resyncRoom} from "../../stores";
+    import Door from "../objects/Door.svelte";
+    import {resyncConnections, resyncOutlets, resyncWifi} from "../../stores";
 
     let rawEthernetCableData: EscapeObject = {
         name: "Raw Ethernet Cable",
@@ -46,11 +47,24 @@
         visible: true,
     };
 
+    let doorData: EscapeDoor = {
+        name: "Door",
+        img: "/objects/door.png",
+        type: "Door",
+        needsLock: false,
+        hasLock: false,
+        lockCode: "",
+        unlocked: false,
+        needsConnection: true,
+        hasConnection: false,
+        visible: true,
+    };
+
     let accessPointData: EscapeAccessPoint = {
         name: "Access Point",
         img: "/objects/access_point.png",
         type: "AccessPoint",
-        connectedDevices: [],
+        connectedDevices: [doorData],
         needsConnection: true,
         hasConnection: false,
         visible: false,
@@ -113,19 +127,19 @@
         <Cabinet bind:objectData={cabinetData}/>
     </Interactable>
 
-    {#key $resyncRoom}
+    {#key $resyncConnections}
         <Interactable posX="300" posY="200" objectData={codeDeviceData}>
             <CodeDevice objectData={codeDeviceData}/>
         </Interactable>
     {/key}
 
-    {#key $resyncRoom}
+    {#key $resyncOutlets}
         <Interactable posX="400" posY="200" objectData={wallOutletData}>
             <WallOutlet bind:objectData={wallOutletData}/>
         </Interactable>
     {/key}
 
-    {#key $resyncRoom}
+    {#key $resyncConnections}
         {#if accessPointData.visible}
             <Interactable posX="200" posY="300" objectData={accessPointData}>
                 <AccessPoint bind:objectData={accessPointData}/>
@@ -138,6 +152,12 @@
             <PlacementAnchor bind:objectData={accessPointAnchorData}/>
         </Interactable>
     {/if}
+
+    {#key $resyncWifi}
+        <Interactable posX="400" posY="300" objectData={doorData}>
+            <Door bind:objectData={doorData}/>
+        </Interactable>
+    {/key}
 </main>
 
 <style>

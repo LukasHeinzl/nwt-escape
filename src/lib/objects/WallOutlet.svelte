@@ -1,6 +1,6 @@
 <script lang="ts">
     import ObjectOverlay from "../ObjectOverlay.svelte";
-    import {currentGameData, resyncRoom} from "../../stores";
+    import {currentGameData, resyncConnections} from "../../stores";
 
     function handleConnection(idx: number): void {
         if (idx !== -1) {
@@ -9,7 +9,7 @@
 
         if (objectData.connectedDeviceIdx !== -1) {
             objectData.potentialDevices[objectData.connectedDeviceIdx].hasConnection = idx !== -1;
-            $resyncRoom++;
+            $resyncConnections++;
         }
 
         objectData.connectedDeviceIdx = idx;

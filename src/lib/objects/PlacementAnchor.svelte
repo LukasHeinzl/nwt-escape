@@ -1,6 +1,6 @@
 <script lang="ts">
     import ObjectOverlay from "../ObjectOverlay.svelte";
-    import {currentGameData, resyncRoom} from "../../stores";
+    import {currentGameData, resyncOutlets} from "../../stores";
 
     export let objectData: EscapePlacementAnchor;
     let isOverlayVisible: boolean = false;
@@ -13,7 +13,7 @@
             placedDeviceIdx = idx;
             objectData.potentialDevices[placedDeviceIdx].visible = true;
             objectData.visible = false;
-            $resyncRoom++;
+            $resyncOutlets++;
         }
     }
 </script>

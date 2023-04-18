@@ -13,14 +13,12 @@ export const initialGameData: EscapeGame = {
         {name: "Network Layer", component: Room3},
         {name: "Application Layer", component: Room4},
     ],
-    inventory: [{
-        name: "Ethernet cable",
-        img: "/objects/ethernet_cable.png",
-        type: "EthernetCable"
-    }],
+    inventory: [],
     stats: new Map<string, any>(),
 }
 
 export const currentGameData = writable<EscapeGame>(Object.assign({}, initialGameData));
 export const currentRoom = writable<number>(0);
-export const resyncRoom = writable<number>(0);
+export const resyncOutlets = writable<number>(0);
+export const resyncConnections = writable<number>(0);
+export const resyncWifi = writable<number>(0);

@@ -1,21 +1,22 @@
 <script lang="ts">
-    import {resyncRoom} from "../../stores";
+    import {resyncWifi} from "../../stores";
 
     export let objectData: EscapeAccessPoint;
-    let lastHasConnection: boolean = objectData.hasConnection;
 
     function handleConnectedDevices(hasConnection: boolean): void {
-        if (hasConnection === lastHasConnection) {
-            return;
-        }
-
-        lastHasConnection = hasConnection;
+        let hadChange: boolean = false;
 
         for (let device of objectData.connectedDevices) {
+            if (device.hasConnection !== hasConnection) {
+                hadChange = true;
+            }
+
             device.hasConnection = hasConnection;
         }
 
-        $resyncRoom++;
+        if (hadChange) {
+            $resyncWifi++;
+        }
     }
 
     $: handleConnectedDevices(objectData.hasConnection);

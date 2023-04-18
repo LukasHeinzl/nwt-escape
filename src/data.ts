@@ -34,7 +34,8 @@ interface EscapeCodeDevice extends EscapeNetworkDevice {
     isActive: boolean;
 }
 
-interface EscapeDoor extends EscapeObject {
+interface EscapeDoor extends EscapeNetworkDevice {
+    needsLock: boolean;
     hasLock: boolean;
     lockCode: string;
     unlocked: boolean;

@@ -21,6 +21,7 @@ interface EscapeObject {
 interface EscapeNetworkDevice extends EscapeObject {
     needsConnection: boolean;
     hasConnection: boolean;
+    macAddress: string;
 }
 
 interface EscapeCabinet extends EscapeNetworkDevice {
@@ -53,4 +54,13 @@ interface EscapePlacementAnchor extends EscapeObject {
 
 interface EscapeAccessPoint extends EscapeNetworkDevice {
     connectedDevices: EscapeNetworkDevice[];
+}
+
+interface EscapeSwitch extends EscapeNetworkDevice {
+    connectedDevices: EscapeNetworkDevice[];
+    needsPOE: boolean;
+    hasPOE: boolean;
+    securityPassword: string;
+    securityActive: boolean;
+    blockedMACs: string[];
 }

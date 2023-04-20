@@ -39,6 +39,7 @@
   function disableSecurity(): void {
     if (enteredPassword !== objectData.securityPassword) {
       enteredPassword = "Wrong password";
+      setTimeout(() => enteredPassword = "", 1000);
       return;
     }
 
@@ -74,6 +75,7 @@
     {#if objectData.securityActive}
       Security password required!
       <input type="text" bind:value={enteredPassword} on:change={() => disableSecurity()}>
+      <button on:click={() => disableSecurity()}>Disable security</button>
     {:else}
       {#each objectData.blockedMACs as mac, i (i)}
         <div>

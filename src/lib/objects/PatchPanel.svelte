@@ -30,6 +30,7 @@
     $currentGameData.inventory.push(cable);
     $currentGameData.inventory = $currentGameData.inventory;
 
+    objectData.switch.connectedDevices[idx].hasConnection = false;
     objectData.switch.connectedDevices.splice(idx, 1);
     objectData = objectData;
   }
@@ -42,7 +43,7 @@
     {:else}
       <span>You currently have {patchCablesInInventoryCount} patch cables in your inventory.</span>
       <span>Use one cable to patch an outlet to the switch:</span>
-      <select on:change={(e) => patch(e.target.value)}>
+      <select on:change={(e) => patch(e.target.value)} disabled={patchCablesInInventoryCount === 0}>
         <option value={-1}>Select...</option>
         {#each objectData.outlets as outlet, i (i)}
           {#if !objectData.switch.connectedDevices.includes(outlet)}

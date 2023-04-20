@@ -4,6 +4,46 @@
   import PlacementAnchor from "../objects/PlacementAnchor.svelte";
   import PatchPanel from "../objects/PatchPanel.svelte";
   import WallOutlet from "../objects/WallOutlet.svelte";
+  import Cabinet from "../objects/Cabinet.svelte";
+
+  let securityServerData: EscapeNetworkDevice = {
+    name: "Security Server",
+    type: "SecurityServer",
+    img: "/objects/security_server.png",
+    needsConnection: true,
+    hasConnection: false,
+    macAddress: "",
+    visible: true
+  };
+
+  let switchSecurityPasswordData: EscapeCodeDevice = {
+    name: "Security Information",
+    type: "CodeDevice",
+    img: "/objects/paper.png",
+    visible: true,
+    macAddress: "",
+    needsConnection: false,
+    hasConnection: false,
+    isActive: true,
+    info: "The switch's security password is 1234. The door lock need to  be unblocked from connecting to the switch."
+  };
+
+  let vaultData: EscapeCabinet = {
+    name: "Vault",
+    type: "Cabinet",
+    img: "/objects/vault.png",
+    visible: true,
+    unlocked: false,
+    needsPin: false,
+    needsConnection: true,
+    hasConnection: false,
+    securityProvider: securityServerData,
+    macAddress: "",
+    pin: "",
+    contents: [switchSecurityPasswordData]
+  };
+
+  if (securityServerData) vaultData = vaultData;
 
   let patchCable1Data: EscapeObject = {
     name: "Patch Cable",
@@ -66,10 +106,10 @@
     name: "Wall Outlet 2",
     img: "/objects/wall_outlet.png",
     type: "WallOutlet",
-    connectedDeviceIdx: -1,
+    connectedDeviceIdx: 0,
     needsConnection: true,
     hasConnection: false,
-    potentialDevices: [],
+    potentialDevices: [securityServerData, vaultData],
     visible: true,
     macAddress: ""
   };
@@ -78,13 +118,23 @@
     name: "Wall Outlet 3",
     img: "/objects/wall_outlet.png",
     type: "WallOutlet",
-    connectedDeviceIdx: -1,
+    connectedDeviceIdx: 1,
     needsConnection: true,
     hasConnection: false,
-    potentialDevices: [],
+    potentialDevices: [securityServerData, vaultData],
     visible: true,
     macAddress: ""
   };
+
+  $: if (usableWallOutlet1Data) {
+    securityServerData = securityServerData;
+    vaultData = vaultData;
+  }
+
+  $: if (usableWallOutlet2Data) {
+    securityServerData = securityServerData;
+    vaultData = vaultData;
+  }
 
   let dummyWallOutlet1Data: EscapeWallOutlet = {
     name: "Wall Outlet 4",
@@ -197,6 +247,14 @@
 
   <Interactable posX="400" posY="370" objectData={dummyWallOutlet2Data}>
     <WallOutlet bind:objectData={dummyWallOutlet2Data} />
+  </Interactable>
+
+  <Interactable posX="100" posY="100" objectData={securityServerData}>
+    <img src={securityServerData.img} alt={securityServerData.name} />
+  </Interactable>
+
+  <Interactable posX="200" posY="100" objectData={vaultData}>
+    <Cabinet bind:objectData={vaultData} />
   </Interactable>
 </main>
 

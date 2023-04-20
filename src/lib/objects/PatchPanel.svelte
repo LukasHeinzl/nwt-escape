@@ -42,7 +42,7 @@
       There is no switch installed in the rack.
     {:else}
       <span>You currently have {patchCablesInInventoryCount} patch cables in your inventory.</span>
-      <span>Use one cable to patch an outlet to the switch:</span>
+      <span>Use one cable to patch an outlet / rack mounted device to the switch:</span>
       <select on:change={(e) => patch(e.target.value)} disabled={patchCablesInInventoryCount === 0}>
         <option value={-1}>Select...</option>
         {#each objectData.outlets as outlet, i (i)}
@@ -53,7 +53,7 @@
       </select>
     {/if}
 
-    <span>The following outlets are currently patched:</span>
+    <span>The following outlets / rack mounted devices are currently patched:</span>
     <ul>
       {#each objectData.switch.connectedDevices as outlet, i (i)}
         <li>

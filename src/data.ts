@@ -69,5 +69,5 @@ interface EscapeSwitch extends EscapeNetworkDevice {
 interface EscapePatchPanel extends EscapeObject {
   hasSwitch: boolean;
   switch: EscapeSwitch;
-  outlets: EscapeWallOutlet[];
+  outlets: EscapeNetworkDevice[];
 }

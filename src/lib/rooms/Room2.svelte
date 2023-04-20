@@ -5,6 +5,21 @@
   import PatchPanel from "../objects/PatchPanel.svelte";
   import WallOutlet from "../objects/WallOutlet.svelte";
   import Cabinet from "../objects/Cabinet.svelte";
+  import Door from "../objects/Door.svelte";
+
+  let doorData: EscapeDoor = {
+    name: "Door",
+    img: "/objects/door.png",
+    type: "Door",
+    needsLock: false,
+    hasLock: false,
+    lockCode: "",
+    unlocked: false,
+    needsConnection: true,
+    hasConnection: false,
+    visible: true,
+    macAddress: ""
+  };
 
   let securityServerData: EscapeNetworkDevice = {
     name: "Security Server",
@@ -94,10 +109,10 @@
     name: "Wall Outlet 1",
     img: "/objects/wall_outlet.png",
     type: "WallOutlet",
-    connectedDeviceIdx: -1,
+    connectedDeviceIdx: 0,
     needsConnection: true,
     hasConnection: false,
-    potentialDevices: [],
+    potentialDevices: [doorData],
     visible: true,
     macAddress: "72-6A-74-61-4C-BC"
   };
@@ -125,6 +140,10 @@
     visible: true,
     macAddress: ""
   };
+
+  $: if (doorLockWallOutletData) {
+    doorData = doorData;
+  }
 
   $: if (usableWallOutlet1Data) {
     securityServerData = securityServerData;
@@ -255,6 +274,10 @@
 
   <Interactable posX="200" posY="100" objectData={vaultData}>
     <Cabinet bind:objectData={vaultData} />
+  </Interactable>
+
+  <Interactable posX="300" posY="100" objectData={doorData}>
+    <Door bind:objectData={doorData} />
   </Interactable>
 </main>
 

@@ -8,7 +8,7 @@
     }
 
     if (objectData.connectedDeviceIdx !== -1) {
-      objectData.potentialDevices[objectData.connectedDeviceIdx].hasConnection = idx !== -1 && objectData.isActive;
+      objectData.potentialDevices[objectData.connectedDeviceIdx].hasConnection = idx !== -1 && objectData.hasConnection;
       objectData = objectData;
     }
 
@@ -39,12 +39,12 @@
   let isOverlayVisible: boolean = false;
   let ethernetCablesInInventoryCount: number;
   $: ethernetCablesInInventoryCount = $currentGameData.inventory.filter((obj: EscapeObject) => obj.type === "EthernetCable").length;
-  $: forwardConnection(objectData.isActive);
+  $: forwardConnection(objectData.hasConnection);
 </script>
 
 <ObjectOverlay title={objectData.name} bind:isOverlayVisible>
   <section>
-    <span>This outlet {objectData.isActive ? "has" : "doesn't have"} a network connection.</span>
+    <span>This outlet {objectData.hasConnection ? "has" : "doesn't have"} a network connection.</span>
     {#if objectData.connectedDeviceIdx !== -1}
       This wall outlet is currently connected to:
       <b>{objectData.potentialDevices[objectData.connectedDeviceIdx].name}</b>

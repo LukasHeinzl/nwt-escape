@@ -89,9 +89,11 @@
     img: "/objects/wall_outlet.png",
     type: "WallOutlet",
     connectedDeviceIdx: -1,
-    isActive: true,
+    needsConnection: false,
+    hasConnection: true,
     potentialDevices: [codeDeviceData, accessPointData],
-    visible: true
+    visible: true,
+    macAddress: ""
   };
 
   $: if (wallOutletData) codeDeviceData = codeDeviceData;

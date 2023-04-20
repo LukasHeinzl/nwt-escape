@@ -39,7 +39,7 @@
     name: "Code Device",
     img: "/objects/code_device.png",
     type: "CodeDevice",
-    code: "1234",
+    info: "The secret code is 1234",
     isActive: true,
     needsConnection: true,
     hasConnection: false,

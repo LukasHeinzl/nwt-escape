@@ -33,7 +33,7 @@ interface EscapeCabinet extends EscapeNetworkDevice {
 }
 
 interface EscapeCodeDevice extends EscapeNetworkDevice {
-  code: string;
+  info: string;
   isActive: boolean;
 }
 

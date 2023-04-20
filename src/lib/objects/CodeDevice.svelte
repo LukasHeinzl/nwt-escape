@@ -7,12 +7,12 @@
 
 <ObjectOverlay title={objectData.name} bind:isOverlayVisible>
     {#if objectData.needsConnection && !objectData.hasConnection}
-        This device needs a network connection to show a code.
+        This device needs a network connection to show secret information.
     {:else}
         {#if objectData.isActive}
-            The secret code is: {objectData.code}
+            {objectData.info}
         {:else}
-            This device currently cannot show a code.
+            This device currently cannot show secret information.
         {/if}
     {/if}
 </ObjectOverlay>

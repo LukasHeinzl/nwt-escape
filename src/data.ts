@@ -28,6 +28,8 @@ interface EscapeCabinet extends EscapeNetworkDevice {
   pin: string;
   contents: EscapeObject[];
   unlocked: boolean;
+  needsPin: boolean;
+  securityProvider?: EscapeNetworkDevice;
 }
 
 interface EscapeCodeDevice extends EscapeNetworkDevice {

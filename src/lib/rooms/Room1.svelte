@@ -108,7 +108,8 @@
     unlocked: false,
     needsConnection: false,
     hasConnection: false,
-    macAddress: ""
+    macAddress: "",
+    needsPin: true,
   };
 
   $: if (cabinetData) accessPointData = accessPointData;

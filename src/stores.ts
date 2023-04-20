@@ -5,7 +5,7 @@ import Room3 from "./lib/rooms/Room3.svelte";
 import Room4 from "./lib/rooms/Room4.svelte";
 
 export const initialGameData: EscapeGame = {
-  timeLeft: 100,
+  timeLeft: 180,
   state: "waiting",
   rooms: [
     { name: "Physical Layer", component: Room1 },

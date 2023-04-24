@@ -19,6 +19,7 @@
 <ObjectOverlay title={objectData.name} bind:isOverlayVisible>
   <section>
     This device currently {objectData.door.hasConnection ? "has" : "does not have"} a connection / IP address.<br />
+    IP address: 10.6.0.1
   </section>
 </ObjectOverlay>
 

@@ -80,6 +80,8 @@ interface EscapeRouter extends EscapeNetworkDevice {
   dhcpNetMask: string;
   staticRoutes: Map<string, string>;
   isActive: boolean;
+  hasFirewall: boolean;
+  unblockedPorts: number[];
 }
 
 interface EscapeRoutedCodeDevice extends EscapeNetworkDevice {

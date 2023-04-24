@@ -7,6 +7,7 @@
   let dhcpMsg: string = "";
   let newRoute: string = "";
   let newVia: string = "";
+  let newPort: number = 0;
 
   function addNewRoute() {
     if (!isValidIp(newRoute) || !isValidIp(newVia)) {
@@ -58,6 +59,21 @@
 
     return true;
   }
+
+  function openPort() {
+    if (newPort < 0 || newPort > 65535) {
+      return;
+    }
+
+    objectData.unblockedPorts.push(newPort);
+    objectData = objectData;
+    newPort = 0;
+  }
+
+  function closePort(idx: number) {
+    objectData.unblockedPorts.splice(idx, 1);
+    objectData = objectData;
+  }
 </script>
 
 <ObjectOverlay title={objectData.name} bind:isOverlayVisible>
@@ -95,6 +111,23 @@
         {/each}
       </ul>
     </div>
+    {#if objectData.hasFirewall}
+      <div class="vertical">
+        Firewall - open ports:
+        <div>
+          <input type="number" bind:value={newPort} placeholder="Port number" />
+          <button on:click={() => openPort()}>Add port</button>
+        </div>
+        <ul>
+          {#each objectData.unblockedPorts as port, i (i)}
+            <li>
+              {port}
+              <button on:click={() => closePort(i)}>Delete</button>
+            </li>
+          {/each}
+        </ul>
+      </div>
+    {/if}
   </section>
 </ObjectOverlay>
 

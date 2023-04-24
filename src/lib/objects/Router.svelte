@@ -26,7 +26,7 @@
       return;
     }
 
-    if (!isValidIp(objectData.dhcpNetId) || !isValidIp(objectData.dhcpNetMask) || !isValidIp(objectData.dhcpGateway)) {
+    if (!isValidIp(objectData.dhcpNetId) || !isValidIp(objectData.dhcpNetMask)) {
       objectData.isActive = false;
       dhcpMsg = "Invalid IP address(es)";
       return;
@@ -75,9 +75,6 @@
         </label>
         <label>Subnet Mask:
           <input type="text" bind:value={objectData.dhcpNetMask} on:keyup={() => checkDhcpSettings()} />
-        </label>
-        <label>Default Gateway:
-          <input type="text" bind:value={objectData.dhcpGateway} on:keyup={() => checkDhcpSettings()} />
         </label>
         <span>{dhcpMsg}</span>
         <br />

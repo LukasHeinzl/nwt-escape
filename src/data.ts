@@ -78,7 +78,6 @@ interface EscapeRouter extends EscapeNetworkDevice {
   dhcpEnabled: boolean;
   dhcpNetId: string;
   dhcpNetMask: string;
-  dhcpGateway: string;
   staticRoutes: Map<string, string>;
   isActive: boolean;
 }
@@ -87,4 +86,9 @@ interface EscapeRoutedCodeDevice extends EscapeNetworkDevice {
   router: EscapeRouter;
   switch: EscapeSwitch;
   codeDevice: EscapeCodeDevice;
+}
+
+interface EscapeRoutedDoorLock extends EscapeNetworkDevice {
+  router: EscapeRouter;
+  door: EscapeDoor;
 }

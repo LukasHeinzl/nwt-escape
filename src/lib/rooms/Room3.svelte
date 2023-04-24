@@ -9,6 +9,7 @@
   import Switch from "../objects/Switch.svelte";
   import Router from "../objects/Router.svelte";
   import RoutedCodeDevice from "../objects/RoutedCodeDevice.svelte";
+  import RoutedDoorLock from "../objects/RoutedDoorLock.svelte";
 
   let patchCable1Data: EscapeObject = {
     name: "Patch Cable",
@@ -29,55 +30,6 @@
     img: "/objects/ethernet_cable.png",
     type: "EthernetCable",
     visible: true
-  };
-
-  let wallOutlet1Data: EscapeWallOutlet = {
-    name: "Wall Outlet 1",
-    img: "/objects/wall_outlet.png",
-    type: "WallOutlet",
-    connectedDeviceIdx: -1,
-    needsConnection: true,
-    hasConnection: true,
-    potentialDevices: [],
-    visible: true,
-    macAddress: ""
-  };
-
-  let wallOutlet2Data: EscapeWallOutlet = {
-    name: "Wall Outlet 2",
-    img: "/objects/wall_outlet.png",
-    type: "WallOutlet",
-    connectedDeviceIdx: -1,
-    needsConnection: true,
-    hasConnection: true,
-    potentialDevices: [],
-    visible: true,
-    macAddress: ""
-  };
-
-  let wallOutlet3Data: EscapeWallOutlet = {
-    name: "Wall Outlet 3",
-    img: "/objects/wall_outlet.png",
-    type: "WallOutlet",
-    connectedDeviceIdx: -1,
-    needsConnection: true,
-    hasConnection: true,
-    potentialDevices: [],
-    visible: true,
-    macAddress: ""
-  };
-
-  let cabinetData: EscapeCabinet = {
-    name: "Cabinet",
-    img: "/objects/cabinet.png",
-    type: "Cabinet",
-    contents: [ethernetCableData],
-    pin: "1234",
-    unlocked: false,
-    needsConnection: false,
-    hasConnection: false,
-    macAddress: "",
-    needsPin: true
   };
 
   let codeDeviceData: EscapeCodeDevice = {
@@ -142,7 +94,6 @@
     dhcpEnabled: false,
     dhcpNetId: "",
     dhcpNetMask: "",
-    dhcpGateway: "",
     isActive: false,
     switch: switchData,
     staticRoutes: new Map<string, string>()
@@ -179,6 +130,75 @@
     outlets: []
   };
 
+  let routedDoorLockData: EscapeRoutedDoorLock = {
+    name: "Routed Door Lock",
+    type: "RoutedDoorLock",
+    img: "/objects/door_lock.png",
+    visible: true,
+    needsConnection: true,
+    hasConnection: false,
+    macAddress: "",
+    door: doorData,
+    router: routerData
+  };
+
+  let routedDoorLockAnchorData: EscapePlacementAnchor = {
+    name: "Routed Door Lock Anchor",
+    img: "/objects/door_lock_anchor.png",
+    type: "PlacementAnchor",
+    potentialDevices: [routedDoorLockData],
+    visible: true
+  };
+
+  let cabinetData: EscapeCabinet = {
+    name: "Cabinet",
+    img: "/objects/cabinet.png",
+    type: "Cabinet",
+    contents: [ethernetCableData, routedDoorLockData],
+    pin: "1234",
+    unlocked: false,
+    needsConnection: false,
+    hasConnection: false,
+    macAddress: "",
+    needsPin: true
+  };
+
+  let wallOutlet1Data: EscapeWallOutlet = {
+    name: "Wall Outlet 1",
+    img: "/objects/wall_outlet.png",
+    type: "WallOutlet",
+    connectedDeviceIdx: -1,
+    needsConnection: true,
+    hasConnection: true,
+    potentialDevices: [routedDoorLockData],
+    visible: true,
+    macAddress: ""
+  };
+
+  let wallOutlet2Data: EscapeWallOutlet = {
+    name: "Wall Outlet 2",
+    img: "/objects/wall_outlet.png",
+    type: "WallOutlet",
+    connectedDeviceIdx: -1,
+    needsConnection: true,
+    hasConnection: true,
+    potentialDevices: [routedDoorLockData],
+    visible: true,
+    macAddress: ""
+  };
+
+  let wallOutlet3Data: EscapeWallOutlet = {
+    name: "Wall Outlet 3",
+    img: "/objects/wall_outlet.png",
+    type: "WallOutlet",
+    connectedDeviceIdx: -1,
+    needsConnection: true,
+    hasConnection: true,
+    potentialDevices: [routedDoorLockData],
+    visible: true,
+    macAddress: ""
+  };
+
   $: {
     if (codeDeviceData.visible && !codeDeviceAnchorData.visible && !patchPanelData.outlets.includes(codeDeviceData)) {
       patchPanelData.outlets.push(codeDeviceData);
@@ -191,9 +211,13 @@
     patchPanelData = patchPanelData;
   }
 
-  $: if (routerData) routedCodeDeviceData = routedCodeDeviceData;
+  $: if (routerData) {
+    routedCodeDeviceData = routedCodeDeviceData;
+    routedDoorLockData = routedDoorLockData;
+  }
   $: if (patchPanelData) switchData = switchData;
   $: if (routedCodeDeviceData) codeDeviceData = codeDeviceData;
+  $: if (routedDoorLockData) doorData = doorData;
 </script>
 
 <main>
@@ -276,6 +300,18 @@
   <Interactable posX="500" posY="600" objectData={routerData}>
     <Router bind:objectData={routerData} />
   </Interactable>
+
+  {#if !routedDoorLockAnchorData.visible}
+    <Interactable posX="500" posY="100" objectData={routedDoorLockData}>
+      <RoutedDoorLock bind:objectData={routedDoorLockData} />
+    </Interactable>
+  {/if}
+
+  {#if routedDoorLockAnchorData.visible}
+    <Interactable posX="500" posY="100" objectData={routedDoorLockAnchorData}>
+      <PlacementAnchor bind:objectData={routedDoorLockAnchorData} />
+    </Interactable>
+  {/if}
 </main>
 
 <style>

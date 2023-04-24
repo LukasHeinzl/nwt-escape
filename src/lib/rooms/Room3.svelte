@@ -37,7 +37,7 @@
     img: "/objects/code_device.png",
     type: "CodeDevice",
     info: "The secret code is 1234",
-    isActive: true,
+    isActive: false,
     needsConnection: true,
     hasConnection: false,
     visible: true,

@@ -31,6 +31,10 @@
     $currentGameData.inventory.splice(0);
     $currentGameData.inventory = $currentGameData.inventory;
     $currentRoom++;
+
+    if ($currentRoom === $currentGameData.rooms.length) {
+      $currentGameData.state = "won";
+    }
   }
 
   export let objectData: EscapeDoor;

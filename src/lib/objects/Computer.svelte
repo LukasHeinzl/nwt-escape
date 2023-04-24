@@ -75,6 +75,10 @@
         output = currentPc === "user@local" ? "instructions.txt" : "security_server";
       } else if (input[0] === "cat") {
         output = "cat: missing operand";
+      } else if (input[0] === "./security_server" && currentPc === "admin@secserv") {
+        output = "Started security server";
+        objectData.serverRunning = true;
+        objectData = objectData;
       } else {
         output = `${input[0]}: command not found`;
       }
@@ -93,6 +97,10 @@
           currentPc = "user@local";
           output = "";
         }
+      } else if (input[0] === "./security_server" && currentPc === "admin@secserv") {
+        output = "Started security server";
+        objectData.serverRunning = true;
+        objectData = objectData;
       } else if (input[0] === "ls") {
         output = "ls: cannot access '" + input[1] + "': No such file or directory";
       } else if (input[0] === "ssh") {

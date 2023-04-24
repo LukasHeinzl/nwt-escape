@@ -96,4 +96,5 @@ interface EscapeRoutedDoorLock extends EscapeNetworkDevice {
 
 interface EscapeComputer extends EscapeObject {
   router: EscapeRouter;
+  serverRunning: boolean;
 }

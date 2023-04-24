@@ -4,6 +4,7 @@
   import Router from "../objects/Router.svelte";
   import Server from "../objects/Server.svelte";
   import Computer from "../objects/Computer.svelte";
+  import Door from "../objects/Door.svelte";
 
   let routerData: EscapeRouter = {
     name: "Router",
@@ -63,7 +64,8 @@
     type: "Computer",
     img: "/objects/server.png",
     visible: true,
-    router: routerData
+    router: routerData,
+    serverRunning: false
   };
 
   let monitorData: EscapeObject = {
@@ -73,7 +75,24 @@
     visible: true
   };
 
+  let doorData: EscapeDoor = {
+    name: "Door",
+    img: "/objects/door.png",
+    type: "Door",
+    needsLock: false,
+    hasLock: false,
+    lockCode: "",
+    unlocked: false,
+    needsConnection: true,
+    hasConnection: false,
+    visible: true,
+    macAddress: ""
+  };
+
   $: if (routerData) computerData = computerData;
+  $: if (computerData) {
+    doorData.hasConnection = computerData.serverRunning && routerData.unblockedPorts.includes(1234);
+  }
 </script>
 
 <main>
@@ -101,6 +120,10 @@
 
   <Interactable posX="100" posY="200" objectData={monitorData}>
     <img src={monitorData.img} alt={monitorData.name} />
+  </Interactable>
+
+  <Interactable posX="300" posY="150" objectData={doorData}>
+    <Door bind:objectData={doorData} />
   </Interactable>
 </main>
 

@@ -99,7 +99,8 @@
     <div class="vertical">
       Static routes:
       <div>
-        Add route to <input type="text" bind:value={newRoute} /> via <input type="text" bind:value={newVia} />
+        Add route to <input type="text" bind:value={newRoute} />
+        via <input type="text" bind:value={newVia} on:change={() => addNewRoute()} />
         <button on:click={() => addNewRoute()}>Add</button>
       </div>
       <ul>
@@ -115,7 +116,7 @@
       <div class="vertical">
         Firewall - open ports:
         <div>
-          <input type="number" bind:value={newPort} placeholder="Port number" />
+          <input type="number" bind:value={newPort} placeholder="Port number" on:change={() => openPort()} />
           <button on:click={() => openPort()}>Add port</button>
         </div>
         <ul>

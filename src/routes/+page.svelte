@@ -1,143 +1,146 @@
 <script lang="ts">
-    import {currentGameData, currentRoom, initialGameData} from "../stores";
-    import Interactable from "../lib/Interactable.svelte";
-    import EscapeObject from "../lib/EscapeObject.svelte";
+  import { currentGameData, currentRoom, initialGameData } from "../stores";
+  import Interactable from "../lib/Interactable.svelte";
+  import EscapeObject from "../lib/EscapeObject.svelte";
 
-    let timer: number | undefined;
+  let timer: number | undefined;
 
-    function formatTime(time: number): string {
-        let minutes = time % 60 + "";
-        let hours = Math.floor((time / 60) % 60) + "";
+  function formatTime(time: number): string {
+    let minutes = time % 60 + "";
+    let hours = Math.floor((time / 60) % 60) + "";
 
-        minutes = minutes.padStart(2, "0");
-        hours = hours.padStart(2, "0");
+    minutes = minutes.padStart(2, "0");
+    hours = hours.padStart(2, "0");
 
-        return hours + ":" + minutes;
+    return hours + ":" + minutes;
+  }
+
+  async function startGame(retry: boolean = false) {
+    if (retry) {
+      $currentRoom = 0;
+      $currentGameData = Object.assign({}, initialGameData);
     }
 
-    async function startGame(retry: boolean = false) {
-        if (retry) {
-            $currentRoom = 0;
-            $currentGameData = Object.assign({}, initialGameData);
-        }
+    $currentGameData.state = "playing";
+    resumeGame();
+  }
 
+  function handlePause(e: KeyboardEvent): void {
+    if (e.key === "Escape") {
+      if ($currentGameData.state === "playing") {
+        $currentGameData.state = "paused";
+        clearTimeout(timer!);
+      } else {
         $currentGameData.state = "playing";
         resumeGame();
+      }
+    }
+  }
+
+  function resumeGame(): void {
+    timer = setInterval(countdown, 1000);
+    $currentGameData.state = "playing";
+  }
+
+  function countdown(): void {
+    $currentGameData.timeLeft -= 1;
+
+    if ($currentGameData.timeLeft === 0) {
+      clearInterval(timer!);
+      timer = undefined;
+      $currentGameData.state = "lost";
+    }
+  }
+
+  function downloadStats(): void {
+    console.log(JSON.stringify(Object.fromEntries($currentGameData!.stats)));
+  }
+
+  function trackClicks(): void {
+    if ($currentGameData.state !== "playing") {
+      return;
     }
 
-    function handlePause(e: KeyboardEvent): void {
-        if (e.key === "Escape") {
-            if ($currentGameData.state === "playing") {
-                $currentGameData.state = "paused";
-                clearTimeout(timer!);
-            } else {
-                $currentGameData.state = "playing";
-                resumeGame();
-            }
-        }
-    }
+    let currentClickCount: number = $currentGameData.stats.get("totalClickCount") ?? 0;
+    $currentGameData.stats.set("totalClickCount", currentClickCount + 1);
+  }
 
-    function resumeGame(): void {
-        timer = setInterval(countdown, 1000);
-        $currentGameData.state = "playing";
-    }
-
-    function countdown(): void {
-        $currentGameData.timeLeft -= 1;
-
-        if ($currentGameData.timeLeft === 0) {
-            clearInterval(timer!);
-            timer = undefined;
-            $currentGameData.state = "lost";
-        }
-    }
-
-    function downloadStats(): void {
-        console.log(JSON.stringify(Object.fromEntries($currentGameData!.stats)));
-    }
-
-    function trackClicks(): void {
-        if ($currentGameData.state !== "playing") {
-            return;
-        }
-
-        let currentClickCount: number = $currentGameData.stats.get("totalClickCount") ?? 0;
-        $currentGameData.stats.set("totalClickCount", currentClickCount + 1);
-    }
+  $: if ($currentGameData.state === "won") clearInterval(timer!);
 </script>
 
-<svelte:window on:keyup={(e) => handlePause(e)} on:click={() => trackClicks()}/>
+<svelte:window on:keyup={(e) => handlePause(e)} on:click={() => trackClicks()} />
 
 <main>
-    <div id="timer">
-        {formatTime($currentGameData?.timeLeft ?? 0)}
-    </div>
+  <div id="timer">
+    {formatTime($currentGameData?.timeLeft ?? 0)}
+  </div>
 
-    <header id="title">
-        <h1>
-            Escape the net-labs - Room {$currentRoom + 1}
-            "{$currentGameData.rooms[$currentRoom]?.name ?? ""}"
-        </h1>
-    </header>
+  <header id="title">
+    <h1>
+      Escape the net-labs - Room {$currentRoom + 1}
+      "{$currentGameData.rooms[$currentRoom]?.name ?? ""}"
+    </h1>
+  </header>
 
-    <aside id="inventory">
-        <h2>Inventory</h2>
-        <div>
-            {#each $currentGameData.inventory as obj, i (i)}
-                <div class="slot">
-                    <Interactable posX={-1} posY={-1} objectData={obj}>
-                        <EscapeObject objectData={obj}/>
-                    </Interactable>
-                </div>
-            {/each}
+  <aside id="inventory">
+    <h2>Inventory</h2>
+    <div>
+      {#each $currentGameData.inventory as obj, i (i)}
+        <div class="slot">
+          <Interactable posX={-1} posY={-1} objectData={obj}>
+            <EscapeObject objectData={obj} />
+          </Interactable>
         </div>
-    </aside>
+      {/each}
+    </div>
+  </aside>
 
-    <section id="currentRoom">
-        <svelte:component this={$currentGameData.rooms[$currentRoom]?.component ?? null}/>
-    </section>
+  <section id="currentRoom">
+    <svelte:component this={$currentGameData.rooms[$currentRoom]?.component ?? null} />
+  </section>
 </main>
 
 <div id="overlay" class:hidden={$currentGameData.state === "playing"}>
-    <h1>Welcome to nwt-escape</h1>
-    <h2>- A web-based point-and-click escape game -</h2>
+  <h1>Welcome to nwt-escape</h1>
+  <h2>- A web-based point-and-click escape game -</h2>
 
-    <section>
-        {#if $currentGameData.state === "won"}
-            <b>GAME WON</b>
-        {:else if $currentGameData.state === "lost"}
-            <b>GAME OVER</b>
-        {:else if $currentGameData.state === "paused"}
-            <b>PAUSED</b>
-        {/if}
-
-        <div><b>Title:</b>Escape the net-labs</div>
-        <div>
-            <b>Rooms{$currentGameData.state === "won" || $currentGameData.state === "lost" ? " completed" : ""}:</b>
-            {#if $currentGameData.state === "won" || $currentGameData.state === "lost"}
-                {$currentRoom} /
-            {/if}
-            {$currentGameData.rooms.length}
-        </div>
-        <div>
-            <b>Time{$currentGameData.state !== "waiting" ? " left" : ""}: </b>
-            {formatTime($currentGameData?.timeLeft ?? 0)}
-        </div>
-    </section>
-
-    <button on:click={() => $currentGameData.state === "paused" ? resumeGame() : startGame($currentGameData.state === "lost")}>
-        {#if $currentGameData.state === "paused"}
-            Resume
-        {:else if $currentGameData.state === "lost" || $currentGameData.state === "won"}
-            Retry
-        {:else}
-            Start
-        {/if}
-    </button>
-
-    {#if $currentGameData.state === "won" || $currentGameData.state === "lost"}
-        <button on:click={() => downloadStats()}>Download stats</button>
+  <section>
+    {#if $currentGameData.state === "won"}
+      <b>GAME WON</b>
+    {:else if $currentGameData.state === "lost"}
+      <b>GAME OVER</b>
+    {:else if $currentGameData.state === "paused"}
+      <b>PAUSED</b>
     {/if}
+
+    <div><b>Title:</b>Escape the net-labs</div>
+    <div>
+      <b>Rooms{$currentGameData.state === "won" || $currentGameData.state === "lost" ? " completed" : ""}:</b>
+      {#if $currentGameData.state === "won" || $currentGameData.state === "lost"}
+        {$currentRoom} /
+      {/if}
+      {$currentGameData.rooms.length}
+    </div>
+    <div>
+      <b>Time{$currentGameData.state !== "waiting" ? " left" : ""}: </b>
+      {formatTime($currentGameData?.timeLeft ?? 0)}
+    </div>
+  </section>
+
+  <button
+    on:click={() => $currentGameData.state === "paused" ? resumeGame() : startGame($currentGameData.state === "lost" || $currentGameData.state === "won")}>
+    {#if $currentGameData.state === "paused"}
+      Resume
+    {:else if $currentGameData.state === "lost" || $currentGameData.state === "won"}
+      Retry
+    {:else}
+      Start
+    {/if}
+  </button>
+
+  {#if $currentGameData.state === "won" || $currentGameData.state === "lost"}
+    <button on:click={() => downloadStats()}>Download stats</button>
+  {/if}
 </div>
 
 <style>

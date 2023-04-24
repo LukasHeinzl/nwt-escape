@@ -71,3 +71,20 @@ interface EscapePatchPanel extends EscapeObject {
   switch: EscapeSwitch;
   outlets: EscapeNetworkDevice[];
 }
+
+interface EscapeRouter extends EscapeNetworkDevice {
+  switch: EscapeSwitch;
+  needsDhcp: boolean;
+  dhcpEnabled: boolean;
+  dhcpNetId: string;
+  dhcpNetMask: string;
+  dhcpGateway: string;
+  staticRoutes: Map<string, string>;
+  isActive: boolean;
+}
+
+interface EscapeRoutedCodeDevice extends EscapeNetworkDevice {
+  router: EscapeRouter;
+  switch: EscapeSwitch;
+  codeDevice: EscapeCodeDevice;
+}

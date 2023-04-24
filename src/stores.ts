@@ -18,4 +18,4 @@ export const initialGameData: EscapeGame = {
 };
 
 export const currentGameData = writable<EscapeGame>(Object.assign({}, initialGameData));
-export const currentRoom = writable<number>(3);
+export const currentRoom = writable<number>(0);

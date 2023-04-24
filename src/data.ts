@@ -73,7 +73,6 @@ interface EscapePatchPanel extends EscapeObject {
 }
 
 interface EscapeRouter extends EscapeNetworkDevice {
-  switch: EscapeSwitch;
   needsDhcp: boolean;
   dhcpEnabled: boolean;
   dhcpNetId: string;

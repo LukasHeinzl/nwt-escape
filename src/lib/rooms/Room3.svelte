@@ -95,7 +95,6 @@
     dhcpNetId: "",
     dhcpNetMask: "",
     isActive: false,
-    switch: switchData,
     staticRoutes: new Map<string, string>(),
     hasFirewall: false,
     unblockedPorts: []

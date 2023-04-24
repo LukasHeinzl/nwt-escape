@@ -1,6 +1,6 @@
 <script lang="ts">
   import ObjectOverlay from "../ObjectOverlay.svelte";
-  import { currentGameData } from "../../stores";
+  import { currentGameData, currentRoom } from "../../stores";
 
   export let objectData: EscapePatchPanel;
 
@@ -18,6 +18,9 @@
 
     objectData.switch.connectedDevices.push(objectData.outlets[idx]);
     objectData = objectData;
+
+    let currentPatchCount = $currentGameData.stats.get("patchesInPanel" + objectData.name + "Room" + $currentRoom) ?? 0;
+    $currentGameData.stats.set("patchesInPanel" + objectData.name + "Room" + $currentRoom, currentPatchCount + 1);
   }
 
   function unpatch(idx: number): void {
@@ -33,6 +36,9 @@
     objectData.switch.connectedDevices[idx].hasConnection = false;
     objectData.switch.connectedDevices.splice(idx, 1);
     objectData = objectData;
+
+    let currentPatchCount = $currentGameData.stats.get("unpatchesInPanel" + objectData.name + "Room" + $currentRoom) ?? 0;
+    $currentGameData.stats.set("unpatchesInPanel" + objectData.name + "Room" + $currentRoom, currentPatchCount + 1);
   }
 </script>
 

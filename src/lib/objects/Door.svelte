@@ -32,6 +32,8 @@
     $currentGameData.inventory = $currentGameData.inventory;
     $currentRoom++;
 
+    $currentGameData.stats.set("timeLeftAfterRoom" + $currentRoom, $currentGameData.timeLeft);
+
     if ($currentRoom === $currentGameData.rooms.length) {
       $currentGameData.state = "won";
     }

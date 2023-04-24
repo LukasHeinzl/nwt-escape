@@ -1,5 +1,6 @@
 <script lang="ts">
   import ObjectOverlay from "../ObjectOverlay.svelte";
+  import { currentGameData, currentRoom } from "../../stores";
 
   export let objectData: EscapeRouter;
 
@@ -11,6 +12,8 @@
 
   function addNewRoute() {
     if (!isValidIp(newRoute) || !isValidIp(newVia)) {
+      let failedCount = $currentGameData.stats.get("routerRoom" + $currentRoom + "FailedNewRoutes") ?? 0;
+      $currentGameData.stats.set("routerRoom" + $currentRoom + "FailedNewRoutes", failedCount + 1);
       return;
     }
 
@@ -18,6 +21,9 @@
     objectData = objectData;
     newRoute = "";
     newVia = "";
+
+    let successCount = $currentGameData.stats.get("routerRoom" + $currentRoom + "AddedNewRoutes") ?? 0;
+    $currentGameData.stats.set("routerRoom" + $currentRoom + "AddedNewRoutes", successCount + 1);
   }
 
   function checkDhcpSettings() {
@@ -62,17 +68,25 @@
 
   function openPort() {
     if (newPort < 0 || newPort > 65535) {
+      let count = $currentGameData.stats.get("routerRoom" + $currentRoom + "FailedToOpenPort") ?? 0;
+      $currentGameData.stats.set("routerRoom" + $currentRoom + "FailedToOpenPort", count + 1);
       return;
     }
 
     objectData.unblockedPorts.push(newPort);
     objectData = objectData;
     newPort = 0;
+
+    let count = $currentGameData.stats.get("routerRoom" + $currentRoom + "OpenedPort") ?? 0;
+    $currentGameData.stats.set("routerRoom" + $currentRoom + "OpenedPort", count + 1);
   }
 
   function closePort(idx: number) {
     objectData.unblockedPorts.splice(idx, 1);
     objectData = objectData;
+
+    let count = $currentGameData.stats.get("routerRoom" + $currentRoom + "ClosedPort") ?? 0;
+    $currentGameData.stats.set("routerRoom" + $currentRoom + "ClosedPort", count + 1);
   }
 </script>
 

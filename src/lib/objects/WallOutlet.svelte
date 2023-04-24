@@ -1,6 +1,6 @@
 <script lang="ts">
   import ObjectOverlay from "../ObjectOverlay.svelte";
-  import { currentGameData } from "../../stores";
+  import { currentGameData, currentRoom } from "../../stores";
 
   function handleConnection(idx: number): void {
     if (idx !== -1) {
@@ -17,6 +17,9 @@
     if (objectData.connectedDeviceIdx !== -1) {
       let cableIdx: number = $currentGameData.inventory.findIndex((obj: EscapeObject) => obj.type === "EthernetCable");
       $currentGameData.inventory.splice(cableIdx, 1);
+
+      let count = $currentGameData.stats.get("wallOutlet" + objectData.name + "Room" + $currentRoom + "Connected") ?? 0;
+      $currentGameData.stats.set("wallOutlet" + objectData.name + "Room" + $currentRoom + "Connected", count + 1);
     } else {
       let cable: EscapeObject = {
         name: "Ethernet cable",
@@ -24,6 +27,9 @@
         type: "EthernetCable"
       };
       $currentGameData.inventory.push(cable);
+
+      let count = $currentGameData.stats.get("wallOutlet" + objectData.name + "Room" + $currentRoom + "Disconnected") ?? 0;
+      $currentGameData.stats.set("wallOutlet" + objectData.name + "Room" + $currentRoom + "Disconnected", count + 1);
     }
 
     $currentGameData.inventory = $currentGameData.inventory;

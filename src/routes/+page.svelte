@@ -63,6 +63,8 @@
 
     let currentClickCount: number = $currentGameData.stats.get("totalClickCount") ?? 0;
     $currentGameData.stats.set("totalClickCount", currentClickCount + 1);
+    currentClickCount = $currentGameData.stats.get("room" + $currentRoom + "ClickCount") ?? 0;
+    $currentGameData.stats.set("room" + $currentRoom + "ClickCount", currentClickCount + 1);
   }
 
   $: if ($currentGameData.state === "won") clearInterval(timer!);

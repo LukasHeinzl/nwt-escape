@@ -1,5 +1,6 @@
 <script lang="ts">
   import ObjectOverlay from "../ObjectOverlay.svelte";
+  import { currentGameData, currentRoom } from "../../stores";
 
   export let objectData: EscapeSwitch;
 
@@ -40,6 +41,10 @@
     if (enteredPassword !== objectData.securityPassword) {
       enteredPassword = "Wrong password";
       setTimeout(() => enteredPassword = "", 1000);
+
+      let count = $currentGameData.stats.get("switchRoom" + $currentRoom + "WrongSecurityPassword") ?? 0;
+      $currentGameData.stats.set("switchRoom" + $currentRoom + "WrongSecurityPassword", count + 1);
+
       return;
     }
 

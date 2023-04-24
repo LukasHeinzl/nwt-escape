@@ -93,3 +93,7 @@ interface EscapeRoutedDoorLock extends EscapeNetworkDevice {
   router: EscapeRouter;
   door: EscapeDoor;
 }
+
+interface EscapeComputer extends EscapeObject {
+  router: EscapeRouter;
+}

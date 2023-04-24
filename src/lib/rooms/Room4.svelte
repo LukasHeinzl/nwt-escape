@@ -3,6 +3,7 @@
   import Switch from "../objects/Switch.svelte";
   import Router from "../objects/Router.svelte";
   import Server from "../objects/Server.svelte";
+  import Computer from "../objects/Computer.svelte";
 
   let routerData: EscapeRouter = {
     name: "Router",
@@ -56,6 +57,23 @@
     img: "/objects/server.png",
     visible: true
   };
+
+  let computerData: EscapeComputer = {
+    name: "Computer",
+    type: "Computer",
+    img: "/objects/server.png",
+    visible: true,
+    router: routerData
+  };
+
+  let monitorData: EscapeObject = {
+    name: "Monitor",
+    type: "Monitor",
+    img: "/objects/monitor.png",
+    visible: true
+  };
+
+  $: if (routerData) computerData = computerData;
 </script>
 
 <main>
@@ -75,6 +93,14 @@
 
   <Interactable posX="500" posY="300" objectData={serverData}>
     <Server bind:objectData={serverData} />
+  </Interactable>
+
+  <Interactable posX="300" posY="300" objectData={computerData}>
+    <Computer bind:objectData={computerData} />
+  </Interactable>
+
+  <Interactable posX="100" posY="200" objectData={monitorData}>
+    <img src={monitorData.img} alt={monitorData.name} />
   </Interactable>
 </main>
 

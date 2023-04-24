@@ -6,10 +6,8 @@
   let isOverlayVisible: boolean = false;
 
   function checkNetwork(data) {
-    if (data.router.isActive) {
-      if (data.router.dhcpNetId === "10.6.0.0" && data.router.dhcpNetMask.startsWith("255.255.")) {
-        objectData.door.hasConnection = true;
-      }
+    if (data.router.isActive && data.router.dhcpNetId === "10.6.0.0" && data.router.dhcpNetMask.startsWith("255.255.")) {
+      objectData.door.hasConnection = true;
     } else objectData.door.hasConnection = data.router.staticRoutes.get("10.6.0.1") === "127.0.0.1";
   }
 

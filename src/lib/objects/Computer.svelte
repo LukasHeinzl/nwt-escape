@@ -119,7 +119,7 @@
           output = "Welcome to the security server!<br/>" +
             "The security server is a server that is used to store sensitive data.<br/>" +
             "It is protected by a firewall that only allows connections from the local network.<br/>" +
-            "To provide security information to the door lock, the port 1234 needs to be unblocked on the firewall!";
+            "To provide security information to the door lock, the port 25565 needs to be unblocked on the firewall!";
         } else if (input[1] === "security_server" && currentPc === "admin@secserv") {
           output = "cat: binary data cannot be printed";
         } else {

@@ -91,7 +91,7 @@
 
   $: if (routerData) computerData = computerData;
   $: if (computerData) {
-    doorData.hasConnection = computerData.serverRunning && routerData.unblockedPorts.includes(1234);
+    doorData.hasConnection = computerData.serverRunning && routerData.unblockedPorts.includes(25565);
   }
 </script>
 

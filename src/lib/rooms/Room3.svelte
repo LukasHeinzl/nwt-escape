@@ -193,6 +193,7 @@
 
   $: if (routerData) routedCodeDeviceData = routedCodeDeviceData;
   $: if (patchPanelData) switchData = switchData;
+  $: if (routedCodeDeviceData) codeDeviceData = codeDeviceData;
 </script>
 
 <main>

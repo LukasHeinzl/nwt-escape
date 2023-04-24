@@ -5,6 +5,19 @@
 
   let isOverlayVisible: boolean = false;
   let dhcpMsg: string = "";
+  let newRoute: string = "";
+  let newVia: string = "";
+
+  function addNewRoute() {
+    if (!isValidIp(newRoute) || !isValidIp(newVia)) {
+      return;
+    }
+
+    objectData.staticRoutes.set(newRoute, newVia);
+    objectData = objectData;
+    newRoute = "";
+    newVia = "";
+  }
 
   function checkDhcpSettings() {
     if (!objectData.dhcpEnabled) {
@@ -70,8 +83,12 @@
         <br />
       {/if}
     {/if}
-    <div>
+    <div class="vertical">
       Static routes:
+      <div>
+        Add route to <input type="text" bind:value={newRoute} /> via <input type="text" bind:value={newVia} />
+        <button on:click={() => addNewRoute()}>Add</button>
+      </div>
       <ul>
         {#each [...objectData.staticRoutes] as [route, via], i (i)}
           <li>
@@ -87,7 +104,7 @@
 <img src={objectData.img} alt={objectData.name} on:click={() => isOverlayVisible = true} />
 
 <style>
-    section {
+    section, .vertical {
         display: flex;
         flex-direction: column;
         justify-content: center;

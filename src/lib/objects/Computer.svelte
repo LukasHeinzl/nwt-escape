@@ -47,7 +47,7 @@
       sshLoginAttempt = false;
     } else if (input.length === 1) {
       if (sshLoginAttempt) {
-        if (input[0] === "1234") {
+        if (input[0] === "h4x0r") {
           currentPc = "admin@secserv";
           output = "";
         } else {

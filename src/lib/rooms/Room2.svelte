@@ -40,7 +40,7 @@
     needsConnection: false,
     hasConnection: false,
     isActive: true,
-    info: "The switch's security password is 1234. The door lock need to  be unblocked from connecting to the switch."
+    info: "The switch's security password is 127001. The door lock needs to  be unblocked from connecting to the switch."
   };
 
   let vaultData: EscapeCabinet = {
@@ -91,7 +91,7 @@
     needsConnection: false,
     hasConnection: false,
     securityActive: true,
-    securityPassword: "1234",
+    securityPassword: "127001",
     macAddress: "",
     blockedMACs: ["72-6A-74-61-4C-BC"],
     connectedDevices: []

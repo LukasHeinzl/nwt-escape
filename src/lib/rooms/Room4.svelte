@@ -49,7 +49,7 @@
     needsConnection: false,
     macAddress: "",
     visible: true,
-    info: "To unlock the door, the security software needs to run on the server. The credentials are: admin/pw1234"
+    info: "To unlock the door, the security software needs to run on the server. The credentials are: admin/h4x0r"
   };
 
   let serverData: EscapeObject = {

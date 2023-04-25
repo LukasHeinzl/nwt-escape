@@ -100,7 +100,7 @@
   let switchAnchorData: EscapePlacementAnchor = {
     name: "Rack mount for switch",
     type: "PlacementAnchor",
-    img: "/objects/switch_rack_mount.png",
+    img: "",
     visible: true,
     potentialDevices: [switchData]
   };

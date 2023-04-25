@@ -117,54 +117,54 @@
 
 <main>
   {#if rawEthernetCableData.visible}
-    <Interactable posX="100" posY="400" bind:objectData={rawEthernetCableData} isCollectable>
+    <Interactable posX="177" posY="354" bind:objectData={rawEthernetCableData} isCollectable>
       <img src={rawEthernetCableData.img} alt={rawEthernetCableData.name} />
     </Interactable>
   {/if}
 
   {#if cablePlug1Data.visible}
-    <Interactable posX="200" posY="400" bind:objectData={cablePlug1Data} isCollectable>
+    <Interactable posX="60" posY="459" bind:objectData={cablePlug1Data} isCollectable>
       <img src={cablePlug1Data.img} alt={cablePlug1Data.name} />
     </Interactable>
   {/if}
 
   {#if cablePlug2Data.visible}
-    <Interactable posX="300" posY="400" bind:objectData={cablePlug2Data} isCollectable>
+    <Interactable posX="889" posY="364" bind:objectData={cablePlug2Data} isCollectable>
       <img src={cablePlug2Data.img} alt={cablePlug2Data.name} />
     </Interactable>
   {/if}
 
   {#if crimpingToolData.visible}
-    <Interactable posX="400" posY="400" bind:objectData={crimpingToolData} isCollectable>
+    <Interactable posX="957" posY="440" bind:objectData={crimpingToolData} isCollectable>
       <img src={crimpingToolData.img} alt={crimpingToolData.name} />
     </Interactable>
   {/if}
 
-  <Interactable posX="200" posY="200" objectData={cabinetData}>
+  <Interactable posX="397" posY="382" objectData={cabinetData}>
     <Cabinet bind:objectData={cabinetData} />
   </Interactable>
 
-  <Interactable posX="300" posY="200" objectData={codeDeviceData}>
+  <Interactable posX="423" posY="352" objectData={codeDeviceData}>
     <CodeDevice objectData={codeDeviceData} />
   </Interactable>
 
-  <Interactable posX="400" posY="200" objectData={wallOutletData}>
+  <Interactable posX="527" posY="455" objectData={wallOutletData}>
     <WallOutlet bind:objectData={wallOutletData} />
   </Interactable>
 
   {#if accessPointData.visible}
-    <Interactable posX="200" posY="300" objectData={accessPointData}>
+    <Interactable posX="457" posY="188" objectData={accessPointData}>
       <AccessPoint bind:objectData={accessPointData} />
     </Interactable>
   {/if}
 
   {#if accessPointAnchorData.visible}
-    <Interactable posX="200" posY="300" objectData={accessPointAnchorData}>
+    <Interactable posX="492" posY="223" objectData={accessPointAnchorData}>
       <PlacementAnchor bind:objectData={accessPointAnchorData} />
     </Interactable>
   {/if}
 
-  <Interactable posX="400" posY="300" objectData={doorData}>
+  <Interactable posX="577" posY="182" objectData={doorData}>
     <Door objectData={doorData} />
   </Interactable>
 </main>

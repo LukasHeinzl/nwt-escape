@@ -223,93 +223,93 @@
 
 <main>
   {#if patchCable1Data.visible}
-    <Interactable posX="100" posY="100" bind:objectData={patchCable1Data} isCollectable>
+    <Interactable posX="414" posY="445" bind:objectData={patchCable1Data} isCollectable>
       <img src={patchCable1Data.img} alt={patchCable1Data.name} />
     </Interactable>
   {/if}
 
   {#if patchCable2Data.visible}
-    <Interactable posX="300" posY="100" bind:objectData={patchCable2Data} isCollectable>
+    <Interactable posX="876" posY="445" bind:objectData={patchCable2Data} isCollectable>
       <img src={patchCable2Data.img} alt={patchCable2Data.name} />
     </Interactable>
   {/if}
 
   {#if codeDeviceData.visible && codeDeviceAnchorData.visible}
-    <Interactable posX="100" posY="400" bind:objectData={codeDeviceData} isCollectable>
+    <Interactable posX="484" posY="382" bind:objectData={codeDeviceData} isCollectable>
       <img src={codeDeviceData.img} alt={codeDeviceData.name} />
     </Interactable>
   {/if}
 
   {#if codeDeviceData.visible && !codeDeviceAnchorData.visible}
-    <Interactable posX="220" posY="400" objectData={codeDeviceData}>
+    <Interactable posX="754" posY="357" objectData={codeDeviceData}>
       <CodeDevice bind:objectData={codeDeviceData} />
     </Interactable>
   {/if}
 
   {#if codeDeviceAnchorData.visible}
-    <Interactable posX="220" posY="400" objectData={codeDeviceAnchorData}>
+    <Interactable posX="754" posY="357" objectData={codeDeviceAnchorData}>
       <PlacementAnchor bind:objectData={codeDeviceAnchorData} />
     </Interactable>
   {/if}
 
   {#if routedCodeDeviceData.visible && routedCodeDeviceAnchorData.visible}
-    <Interactable posX="100" posY="430" bind:objectData={routedCodeDeviceData} isCollectable>
+    <Interactable posX="287" posY="452" bind:objectData={routedCodeDeviceData} isCollectable>
       <img src={routedCodeDeviceData.img} alt={routedCodeDeviceData.name} />
     </Interactable>
   {/if}
 
   {#if routedCodeDeviceData.visible && !routedCodeDeviceAnchorData.visible}
-    <Interactable posX="300" posY="430" objectData={routedCodeDeviceData}>
+    <Interactable posX="754" posY="324" objectData={routedCodeDeviceData}>
       <RoutedCodeDevice bind:objectData={routedCodeDeviceData} />
     </Interactable>
   {/if}
 
   {#if routedCodeDeviceAnchorData.visible}
-    <Interactable posX="300" posY="430" objectData={routedCodeDeviceAnchorData}>
+    <Interactable posX="754" posY="324" objectData={routedCodeDeviceAnchorData}>
       <PlacementAnchor bind:objectData={routedCodeDeviceAnchorData} />
     </Interactable>
   {/if}
 
-  <Interactable posX="100" posY="500" objectData={cabinetData}>
+  <Interactable posX="608" posY="382" objectData={cabinetData}>
     <Cabinet bind:objectData={cabinetData} />
   </Interactable>
 
-  <Interactable posX="400" posY="200" objectData={wallOutlet1Data}>
+  <Interactable posX="181" posY="455" objectData={wallOutlet1Data}>
     <WallOutlet bind:objectData={wallOutlet1Data} />
   </Interactable>
 
-  <Interactable posX="400" posY="300" objectData={wallOutlet2Data}>
+  <Interactable posX="211" posY="455" objectData={wallOutlet2Data}>
     <WallOutlet bind:objectData={wallOutlet2Data} />
   </Interactable>
 
-  <Interactable posX="400" posY="400" objectData={wallOutlet3Data}>
+  <Interactable posX="241" posY="455" objectData={wallOutlet3Data}>
     <WallOutlet bind:objectData={wallOutlet3Data} />
   </Interactable>
 
-  <Interactable posX="300" posY="150" objectData={doorData}>
+  <Interactable posX="18" posY="182" objectData={doorData}>
     <Door bind:objectData={doorData} />
   </Interactable>
 
-  <Interactable posX="300" posY="500" objectData={patchPanelData}>
+  <Interactable posX="754" posY="237" objectData={patchPanelData}>
     <PatchPanel bind:objectData={patchPanelData} />
   </Interactable>
 
-  <Interactable posX="300" posY="600" objectData={switchData}>
+  <Interactable posX="754" posY="258" objectData={switchData}>
     <Switch bind:objectData={switchData} />
   </Interactable>
 
-  <Interactable posX="500" posY="600" objectData={routerData}>
+  <Interactable posX="754" posY="291" objectData={routerData}>
     <Router bind:objectData={routerData} />
   </Interactable>
 
   {#if !routedDoorLockAnchorData.visible}
-    <Interactable posX="500" posY="100" objectData={routedDoorLockData}>
+    <Interactable posX="177" posY="341" objectData={routedDoorLockData}>
       <RoutedDoorLock bind:objectData={routedDoorLockData} />
     </Interactable>
   {/if}
 
   {#if routedDoorLockAnchorData.visible}
-    <Interactable posX="500" posY="100" objectData={routedDoorLockAnchorData}>
+    <Interactable posX="177" posY="341" objectData={routedDoorLockAnchorData}>
       <PlacementAnchor bind:objectData={routedDoorLockAnchorData} />
     </Interactable>
   {/if}

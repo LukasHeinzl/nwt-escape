@@ -97,32 +97,32 @@
 
 <main>
   {#if credentialsInfo.visible}
-    <Interactable posX="100" posY="100" bind:objectData={credentialsInfo} isCollectable>
+    <Interactable posX="46" posY="437" bind:objectData={credentialsInfo} isCollectable>
       <img src={credentialsInfo.img} alt={credentialsInfo.name} />
     </Interactable>
   {/if}
 
-  <Interactable posX="300" posY="600" objectData={switchData}>
+  <Interactable posX="504" posY="237" objectData={switchData}>
     <Switch bind:objectData={switchData} />
   </Interactable>
 
-  <Interactable posX="500" posY="600" objectData={routerData}>
+  <Interactable posX="504" posY="270" objectData={routerData}>
     <Router bind:objectData={routerData} />
   </Interactable>
 
-  <Interactable posX="500" posY="300" objectData={serverData}>
+  <Interactable posX="504" posY="303" objectData={serverData}>
     <Server bind:objectData={serverData} />
   </Interactable>
 
-  <Interactable posX="300" posY="300" objectData={computerData}>
+  <Interactable posX="504" posY="336" objectData={computerData}>
     <Computer bind:objectData={computerData} />
   </Interactable>
 
-  <Interactable posX="100" posY="200" objectData={monitorData}>
+  <Interactable posX="336" posY="284" objectData={monitorData}>
     <img src={monitorData.img} alt={monitorData.name} />
   </Interactable>
 
-  <Interactable posX="300" posY="150" objectData={doorData}>
+  <Interactable posX="798" posY="182" objectData={doorData}>
     <Door bind:objectData={doorData} />
   </Interactable>
 </main>

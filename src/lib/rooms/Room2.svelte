@@ -209,74 +209,74 @@
 
 <main>
   {#if switchData.visible && switchAnchorData.visible}
-    <Interactable posX="100" posY="400" bind:objectData={switchData} isCollectable>
+    <Interactable posX="685" posY="452" bind:objectData={switchData} isCollectable>
       <img src={switchData.img} alt={switchData.name} />
     </Interactable>
   {/if}
 
   {#if switchData.visible && !switchAnchorData.visible}
-    <Interactable posX="300" posY="400" objectData={switchData}>
+    <Interactable posX="74" posY="258" objectData={switchData}>
       <Switch bind:objectData={switchData} />
     </Interactable>
   {/if}
 
   {#if switchAnchorData.visible}
-    <Interactable posX="300" posY="400" objectData={switchAnchorData}>
+    <Interactable posX="74" posY="258" objectData={switchAnchorData}>
       <PlacementAnchor bind:objectData={switchAnchorData} />
     </Interactable>
   {/if}
 
-  <Interactable posX="300" posY="500" objectData={patchPanelData}>
+  <Interactable posX="74" posY="237" objectData={patchPanelData}>
     <PatchPanel bind:objectData={patchPanelData} />
   </Interactable>
 
   {#if patchCable1Data.visible}
-    <Interactable posX="700" posY="400" bind:objectData={patchCable1Data} isCollectable>
+    <Interactable posX="537" posY="345" bind:objectData={patchCable1Data} isCollectable>
       <img src={patchCable1Data.img} alt={patchCable1Data.name} />
     </Interactable>
   {/if}
 
   {#if patchCable2Data.visible}
-    <Interactable posX="600" posY="400" bind:objectData={patchCable2Data} isCollectable>
+    <Interactable posX="71" posY="433" bind:objectData={patchCable2Data} isCollectable>
       <img src={patchCable2Data.img} alt={patchCable2Data.name} />
     </Interactable>
   {/if}
 
   {#if patchCable3Data.visible}
-    <Interactable posX="500" posY="400" bind:objectData={patchCable3Data} isCollectable>
+    <Interactable posX="155" posY="183" bind:objectData={patchCable3Data} isCollectable>
       <img src={patchCable3Data.img} alt={patchCable3Data.name} />
     </Interactable>
   {/if}
 
-  <Interactable posX="400" posY="200" objectData={doorLockWallOutletData}>
+  <Interactable posX="801" posY="455" objectData={doorLockWallOutletData}>
     <WallOutlet bind:objectData={doorLockWallOutletData} />
   </Interactable>
 
-  <Interactable posX="400" posY="250" objectData={usableWallOutlet1Data}>
+  <Interactable posX="461" posY="455" objectData={usableWallOutlet1Data}>
     <WallOutlet bind:objectData={usableWallOutlet1Data} />
   </Interactable>
 
-  <Interactable posX="400" posY="300" objectData={usableWallOutlet2Data}>
+  <Interactable posX="431" posY="455" objectData={usableWallOutlet2Data}>
     <WallOutlet bind:objectData={usableWallOutlet2Data} />
   </Interactable>
 
-  <Interactable posX="400" posY="350" objectData={dummyWallOutlet1Data}>
+  <Interactable posX="231" posY="455" objectData={dummyWallOutlet1Data}>
     <WallOutlet bind:objectData={dummyWallOutlet1Data} />
   </Interactable>
 
-  <Interactable posX="400" posY="370" objectData={dummyWallOutlet2Data}>
+  <Interactable posX="21" posY="455" objectData={dummyWallOutlet2Data}>
     <WallOutlet bind:objectData={dummyWallOutlet2Data} />
   </Interactable>
 
-  <Interactable posX="100" posY="100" objectData={securityServerData}>
+  <Interactable posX="367" posY="382" objectData={securityServerData}>
     <img src={securityServerData.img} alt={securityServerData.name} />
   </Interactable>
 
-  <Interactable posX="200" posY="100" objectData={vaultData}>
+  <Interactable posX="496" posY="382" objectData={vaultData}>
     <Cabinet bind:objectData={vaultData} />
   </Interactable>
 
-  <Interactable posX="300" posY="100" objectData={doorData}>
+  <Interactable posX="839" posY="182" objectData={doorData}>
     <Door bind:objectData={doorData} />
   </Interactable>
 </main>

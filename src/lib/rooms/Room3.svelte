@@ -34,7 +34,7 @@
 
   let codeDeviceData: EscapeCodeDevice = {
     name: "Code Device",
-    img: "/objects/code_device.png",
+    img: "/objects/rack_code_device.png",
     type: "CodeDevice",
     info: "The secret code is 80443",
     isActive: false,
@@ -103,7 +103,7 @@
   let routedCodeDeviceData: EscapeRoutedCodeDevice = {
     name: "Routed Code Device",
     type: "RoutedCodeDevice",
-    img: "/objects/code_device.png",
+    img: "/objects/rack_code_device.png",
     visible: true,
     needsConnection: true,
     hasConnection: false,
@@ -319,7 +319,7 @@
     main {
         width: 100%;
         height: 100%;
-        background: url("/rooms/room3.png");
+        background: url("/room.png");
         background-size: cover;
     }
 </style>

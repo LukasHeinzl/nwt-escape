@@ -203,7 +203,6 @@
     section#currentRoom {
         position: relative;
         grid-area: currentRoom;
-        padding: 1rem;
         width: 1000px;
         height: 600px;
         justify-self: center;

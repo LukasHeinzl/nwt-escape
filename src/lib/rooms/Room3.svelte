@@ -46,7 +46,7 @@
 
   let codeDeviceAnchorData: EscapePlacementAnchor = {
     name: "Code Device Anchor",
-    img: "/objects/code_device_rack_mount.png",
+    img: "",
     type: "PlacementAnchor",
     potentialDevices: [codeDeviceData],
     visible: true
@@ -115,7 +115,7 @@
 
   let routedCodeDeviceAnchorData: EscapePlacementAnchor = {
     name: "Routed Code Device Anchor",
-    img: "/objects/code_device_rack_mount.png",
+    img: "",
     type: "PlacementAnchor",
     potentialDevices: [routedCodeDeviceData],
     visible: true
@@ -145,7 +145,7 @@
 
   let routedDoorLockAnchorData: EscapePlacementAnchor = {
     name: "Routed Door Lock Anchor",
-    img: "/objects/door_lock_anchor.png",
+    img: "",
     type: "PlacementAnchor",
     potentialDevices: [routedDoorLockData],
     visible: true
@@ -319,7 +319,7 @@
     main {
         width: 100%;
         height: 100%;
-        background: url("/room.png");
+        background: url("/rooms/room3.png");
         background-size: cover;
     }
 </style>

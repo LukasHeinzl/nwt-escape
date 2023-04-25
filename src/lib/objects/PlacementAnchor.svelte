@@ -31,4 +31,12 @@
   {/if}
 </ObjectOverlay>
 
-<img src={objectData.img} alt={objectData.name} on:click={() => isOverlayVisible = true} />
+<img src={objectData.img || objectData.potentialDevices[0].img} alt={objectData.name}
+     on:click={() => isOverlayVisible = true} class:transparent={objectData.img === ""} />
+
+<style>
+    .transparent {
+        opacity: 0.5;
+        filter: saturate(0.1) brightness(1.2);
+    }
+</style>

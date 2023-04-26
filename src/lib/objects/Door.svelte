@@ -36,6 +36,8 @@
 
     if ($currentRoom === $currentGameData.rooms.length) {
       $currentGameData.state = "won";
+    } else {
+      $currentGameData.state = "paused";
     }
   }
 

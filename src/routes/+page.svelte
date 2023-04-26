@@ -43,6 +43,12 @@
   }
 
   function countdown(): void {
+    if ($currentGameData.state === "paused") {
+      clearInterval(timer!);
+      timer = undefined;
+      return;
+    }
+
     $currentGameData.timeLeft -= 1;
 
     if ($currentGameData.timeLeft === 0) {
